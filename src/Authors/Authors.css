@@ -1,0 +1,52 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "Roboto", sans-serif;
+  padding: 15px;
+}
+.item:hover {
+  background-color: #f2f6ff;
+  cursor: pointer;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: #6fcf97;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.info {
+  margin: 0 10px;
+  width: 252px;
+}
+.name {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.44px;
+}
+.email {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: #382a2c;
+  opacity: 0.54;
+}
+.postsCount {
+  float: right;
+}
+.btnClear {
+  margin: 0 auto;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  padding: 10px;
+  width: 100%;
+}
+.btnClear:hover {
+  cursor: pointer;
+  background-color: #e2ebff;
+}
