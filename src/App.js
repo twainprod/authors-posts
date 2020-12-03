@@ -1,4 +1,5 @@
 import React from 'react';
+import { myAPI } from './api';
 import AuthorsContainer from './Authors/AuthorsContainer';
 import './index.css';
 import PostsContainer from './Posts/PostsContainer';
@@ -11,8 +12,7 @@ class App extends React.PureComponent {
     search: ''
   }
   async componentDidMount() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users');
-    const data = await response.json();    
+    const { data } = await myAPI.getAuthors();    
     this.setState({
       isLoading: false,
       data
@@ -45,10 +45,15 @@ class App extends React.PureComponent {
     return (
       <div className="App">    
         { this.state.currentUser ?
-          <PostsContainer currentUser={this.state.currentUser} nullCurrentUser={this.nullCurrentUser} />
-          : <AuthorsContainer state={this.state} data={this.state.data} onSearchHandler={this.onSearchHandler}
-            getPostsById={this.getPostsById} search={this.state.search}
-            isLoading={this.state.isLoading} nullInput={this.nullInput}
+          <PostsContainer currentUser={this.state.currentUser}
+            nullCurrentUser={this.nullCurrentUser} />
+          : <AuthorsContainer state={this.state}
+            data={this.state.data}
+            onSearchHandler={this.onSearchHandler}
+            getPostsById={this.getPostsById}
+            search={this.state.search}
+            isLoading={this.state.isLoading}
+            nullInput={this.nullInput}
           />}          
       </div>
     );

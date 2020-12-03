@@ -16,5 +16,6 @@ code {
   background-color: #fff;
   width: 360px;
   height: 640px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Search from '../Search/Search';
 import Posts from './Posts';
 import Loader from '../Loader/Loader';
+import { myAPI } from '../api';
 
 class PostsContainer extends React.Component {
     
@@ -13,17 +14,16 @@ class PostsContainer extends React.Component {
     }
     
     async fetchData(currentUser = this.state.currentUser) {
-        const Response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${currentUser}`);
-        const postsData = await Response.json();
+        const { data } = await myAPI.getPosts(currentUser);        
         this.setState({
-            posts: postsData,
+            posts: data,
             currentUser,
             isLoading: false
         })
 
     }
     componentDidMount() {
-        this.fetchData();
+        this.fetchData(this.state.currentUser);
         this.setState({
             isLoading: true
         })
@@ -58,16 +58,16 @@ class PostsContainer extends React.Component {
     render() {          
         const filteredPosts = this.getFilteredPosts();
         return <>
-            <p>Posts by {this.state.currentUser}'s ID</p>  
+            <p>Posts of the ID: {this.state.currentUser}</p>  
             {this.state.isLoading ? <Loader /> : <>
                 <Search onSearch={this.onPostsSearchHandler} />
                 <Posts data={filteredPosts} />
                 <div className='btnBack'><button onClick={() => {
                     this.props.nullCurrentUser();
-                }}>	&#129040; Back</button>
+                }}><i className="fas fa-angle-double-left"></i> Back</button>
                     {this.state.search ?
                         <button onClick={() => this.nullInput()}>
-                            &#129041; Show all posts</button> : null}</div></>}
+                            <i className="fas fa-angle-double-up"></i> Show all posts</button> : null}</div></>}
             
             </>
     }
